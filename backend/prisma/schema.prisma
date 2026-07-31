@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  name      String?
+  createdAt DateTime   @default(now())
+  reports   Report[]
+  keywords  Keyword[]
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  url         String
+  score       Int
+  data        Json
+  aiSummary   String?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+}
+
+model Keyword {
+  id          String       @id @default(uuid())
+  term        String
+  domain      String
+  createdAt   DateTime     @default(now())
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  checks      RankCheck[]
+}
+
+model RankCheck {
+  id          String   @id @default(uuid())
+  position    Int?
+  checkedAt   DateTime @default(now())
+  keyword     Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  keywordId   String
+}
