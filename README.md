@@ -4,7 +4,8 @@ A full-stack SEO audit tool: paste a URL, get a scored on-page SEO breakdown
 across 11 factors, an AI-generated plain-English report, and track keyword
 rankings for a domain over time.
 
-**Stack:** React (Vite) · Node.js/Express · PostgreSQL + Prisma · JWT auth done
+**Stack:** React (Vite) · Node.js/Express · PostgreSQL + Prisma · JWT auth 
+
 
 ## Why this project
 
